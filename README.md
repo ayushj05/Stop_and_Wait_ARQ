@@ -37,13 +37,42 @@ g++ Sender.cpp -o Sender
 ## Command to run the programs (as per Ubuntu `18.04`)
 * Simulate delay using the following command:
 ```bash
-sudo tc qdisc add dev lo root netem delay <Delay in miliseconds>
+sudo tc qdisc add dev lo root netem delay DelayInMiliseconds
 ```
 * Open two terminals and run the following commands seperately in each of the terminals
 ```bash
-./Receiver <ReceiverPort> <SenderPort> <PacketDropProbability>
+./Receiver
+```
+ Pass the inputs in the following format:
+```bash
+ReceiverPort SenderPort PacketDropProbability
 ```
 ```bash
-./Sender <SenderPort> <ReceiverPort> <RetransmissionTimer> <NoOfPacketsToBeSent>
+./Sender
 ```
+ Pass the inputs in the following format:
+```bash
+SenderPort ReceiverPort RetransmissionTimer NoOfPacketsToBeSent
+```
+
 (Note: You need to run the Receiver side first and then the Sender side.)
+
+The sender.txt and receiver.txt files uploaded contain the output for following commands:
+```bash
+sudo tc qdisc add dev lo root netem delay 1000
+```
+```bash
+./Receiver
+```
+Inputs:
+```bash
+8080 8081 0.4
+```
+
+```bash
+./Sender
+```
+Inputs:
+```bash
+8081 8080 3 10
+```
