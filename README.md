@@ -43,14 +43,13 @@ sudo tc qdisc add dev lo root netem delay DelayInMiliseconds
 ```bash
 ./Receiver
 ```
- Pass the inputs in the following format:
-```bash
-ReceiverPort SenderPort PacketDropProbability
-```
 ```bash
 ./Sender
 ```
- Pass the inputs in the following format:
+ Pass the inputs in the following format respectively:
+```bash
+ReceiverPort SenderPort PacketDropProbability
+```
 ```bash
 SenderPort ReceiverPort RetransmissionTimer NoOfPacketsToBeSent
 ```
