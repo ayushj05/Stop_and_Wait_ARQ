@@ -1,7 +1,7 @@
 # Implementation of Stop-and-Wait ARQ on top of UDP sockets
 
 ## Course Assignment - CS224 - Computer Networks
-The problem statement can be found [here] (https://github.com/ayushj05/Stop_and_Wait_ARQ/blob/main/Homework-3.pdf).
+The problem statement can be found [here](https://github.com/ayushj05/Stop_and_Wait_ARQ/blob/main/Homework-3.pdf).
 
 ## Explanation of the code
 ### Sender:
