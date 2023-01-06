@@ -64,15 +64,13 @@ sudo tc qdisc add dev lo root netem delay 1000
 ```bash
 ./Receiver
 ```
-Inputs:
-```bash
-8080 8081 0.4
-```
-
 ```bash
 ./Sender
 ```
 Inputs:
+```bash
+8080 8081 0.4
+```
 ```bash
 8081 8080 3 10
 ```
