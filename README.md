@@ -11,9 +11,9 @@ The problem statement can be found [here].
 * Now using the sendto() function, the sender will send its packet to the receiver, staring with sequence number '1'.
 * Now a Retransmission Timer is started using a while loop, in which the time elapsed from just before the start of while loop till the current iteration is measured.
 * Now as per the Stop-and-Wait algorithm:
-** If the retransmission timer expires and there is no acknowledgment from the receiver then the sender will retransmit the same packet.
-** If the sender receives an acknowledgment before the retransmission timer expires and the acknowledgement contains x+1 as its sequence number then the sender transmits the packet with sequence number x+1.
-** If there is an acknowledgment from the receiver containing a sequence number other than x+1 then the sender has to ignore the acknowledgement.
+  * If the retransmission timer expires and there is no acknowledgment from the receiver then the sender will retransmit the same packet.
+  * If the sender receives an acknowledgment before the retransmission timer expires and the acknowledgement contains x+1 as its sequence number then the sender transmits the packet with sequence number x+1.
+  * If there is an acknowledgment from the receiver containing a sequence number other than x+1 then the sender has to ignore the acknowledgement.
 
 ## Receiver:
 * In the implementation of the receiver side, first the socket has been created using the socket() function.
@@ -22,11 +22,11 @@ The problem statement can be found [here].
 * Now using the recvfrom() function, the receiver will wait (because of MSG_WAITALL) until it receives any data.
 * Upon receiving packet, the sender port info is saved into SenderPort and the packet received is saved in buffer.
 * Now the Stop-and-Wait algorithm is ran, as per which the receiver should follow following steps:
-** Receive the packet and check if the packet with correct sequence number is received (the receiver expects the very first packet to have sequence number 1).
-** If the sequence no. is incorrect, an acknowledgment is sent with the expected packet sequence number (which is x+1, where x is the sequence no. of the last packet received from the sender).
-** If the sequence no. is correct, the following steps are done:
-*** A uniformly distributed random variable is generated between 0 and 1. If this number is less than the PacketDropProbability then no acknowledgement is generated. The receiver will wait for the sender to retransmit the packet with the same Sequence number.
-*** Otherwise, an acknowledgement will be sent to the sender which contains the sequence no. of the packet that the receiver is expecting next.
+  * Receive the packet and check if the packet with correct sequence number is received (the receiver expects the very first packet to have sequence number 1).
+  * If the sequence no. is incorrect, an acknowledgment is sent with the expected packet sequence number (which is x+1, where x is the sequence no. of the last packet received from the sender).
+  * If the sequence no. is correct, the following steps are done:
+    * A uniformly distributed random variable is generated between 0 and 1. If this number is less than the PacketDropProbability then no acknowledgement is generated. The receiver will wait for the sender to retransmit the packet with the same Sequence number.
+    * Otherwise, an acknowledgement will be sent to the sender which contains the sequence no. of the packet that the receiver is expecting next.
 
 ## Command for Compilation (as per Ubuntu `18.04`)
 ```bash
