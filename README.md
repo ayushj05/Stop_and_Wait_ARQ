@@ -5,7 +5,7 @@ The problem statement can be found [here](https://github.com/ayushj05/Stop_and_W
 
 ## Explanation of the code
 ### Sender:
-* In the implementation of the sender side, first the socket has been created using the socket() function.
+* In the implementation of the sender side, first the socket is created using the socket() function.
 * Then the information of both sender and receiver is given from the terminal so as to bind the sender port with the socket and also for the sender to know that to which port it has send the packets.
 * Now that we know the sender port, the sender port is binded with the socket.
 * Now using the sendto() function, the sender will send its packet to the receiver, staring with sequence number '1'.
@@ -16,7 +16,7 @@ The problem statement can be found [here](https://github.com/ayushj05/Stop_and_W
   * If there is an acknowledgment from the receiver containing a sequence number other than x+1 then the sender has to ignore the acknowledgement.
 
 ## Receiver:
-* In the implementation of the receiver side, first the socket has been created using the socket() function.
+* In the implementation of the receiver side, first the socket is created using the socket() function.
 * Then the receiver information is given from the terminal so as to bind the receiver port with the socket.
 * Now that we know the receiver port, the receiver port is binded with the socket.
 * Now using the recvfrom() function, the receiver will wait (because of MSG_WAITALL) until it receives any data.
