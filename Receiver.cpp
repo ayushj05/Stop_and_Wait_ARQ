@@ -22,7 +22,7 @@ int main() {
 	struct sockaddr_in ReceiverPort, SenderPort;
 
 	// Creating socket file descriptor
-	if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
+	if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0){
 		perror("socket creation failed");
 		exit(EXIT_FAILURE);
 	}
@@ -33,11 +33,10 @@ int main() {
 	// Filling receiver information
 	ReceiverPort.sin_family = AF_INET; // IPv4
 	ReceiverPort.sin_addr.s_addr = INADDR_ANY;
-    cin >> SenderPort.sin_port >> ReceiverPort.sin_port >> PacketDropProbability;
+	cin >> SenderPort.sin_port >> ReceiverPort.sin_port >> PacketDropProbability;
 	
 	// Bind the socket with the reciever address
-	if ( bind(sockfd, (const struct sockaddr *)&ReceiverPort, sizeof(ReceiverPort)) < 0 )
-	{
+	if (bind(sockfd, (const struct sockaddr *)&ReceiverPort, sizeof(ReceiverPort)) < 0){
 		perror("bind failed");
 		exit(EXIT_FAILURE);
 	}
@@ -47,8 +46,7 @@ int main() {
 
 	ofstream out("receiver.txt");
 	
-	while(true)
-	{
+	while(true){
 		// Receiving Packet from sender
 		n = recvfrom(sockfd, buffer, MAXLINE, MSG_WAITALL, ( struct sockaddr *) &SenderPort, &len);
 
@@ -58,8 +56,7 @@ int main() {
 			NumInPacket.push_back(buffer[j]);
 		int PacketNum = stoi(NumInPacket);
 
-		if(PacketNum != i)
-        {
+		if(PacketNum != i){
 			// Making Acknowledgement array by adding sequence number 'i' to "Acknowledgement:"
 			int j = 16;
 			string num = to_string(i);
@@ -69,20 +66,17 @@ int main() {
 
 			// Sending Acknowlegement to sender
 			sendto(sockfd, Acknowledgement, 17 + (int)log10(i), MSG_CONFIRM, (const struct sockaddr *) &SenderPort, len);
-            cout << Acknowledgement << "\n";
+            		cout << Acknowledgement << "\n";
 			out << Acknowledgement << endl;
-        }
-		else
-		{
+        	}
+		else{
 			double rand_var = ((double) rand())/RAND_MAX;	// Uniformly Distributed Random Variable between 0 and 1
 
-			if(rand_var < PacketDropProbability)	// Drop packet if rand_var is less than PacketDropProbability
-            {
-                cout << "Packet dropped.\n";
+			if(rand_var < PacketDropProbability)	// Drop packet if rand_var is less than PacketDropProbability{
+                		cout << "Packet dropped.\n";
 				out << "Packet dropped." << endl;
-            }
-			else
-			{
+            		}
+			else{
 				// Making Acknowledgement array by adding sequence number 'i+1' to "Acknowledgement:"
 				int j = 16;
 				string num = to_string(i+1);
@@ -91,7 +85,7 @@ int main() {
 				Acknowledgement[j] = '\0';
 				
 				// Sending Acknowlegement to sender
-			    sendto(sockfd, Acknowledgement, 17 + (int)log10(i+1), MSG_CONFIRM, (const struct sockaddr *) &SenderPort, len);
+			    	sendto(sockfd, Acknowledgement, 17 + (int)log10(i+1), MSG_CONFIRM, (const struct sockaddr *) &SenderPort, len);
 				cout << Acknowledgement << "\n";
 				out << Acknowledgement << endl;
 				i++;			// Move to next sequence number
