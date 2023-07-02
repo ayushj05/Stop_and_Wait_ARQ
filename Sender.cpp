@@ -17,20 +17,19 @@ using namespace std;
 	
 // Driver code
 int main() {
-    int sockfd, NoOfPacketsToBeSent;
+    	int sockfd, NoOfPacketsToBeSent;
 	float RetransmissionTimer;
 	char buffer[MAXLINE], Packet[MAXLINE] = "Packet:";
 	struct sockaddr_in ReceiverPort, SenderPort;
 	
 	// Creating socket file descriptor
-	if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) 
-	{
+	if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0){
 		perror("socket creation failed");
 		exit(EXIT_FAILURE);
 	}
 	
 	memset(&ReceiverPort, 0, sizeof(ReceiverPort));
-    memset(&SenderPort, 0, sizeof(SenderPort));
+    	memset(&SenderPort, 0, sizeof(SenderPort));
 		
 	// Filling sender and receiver information
 	ReceiverPort.sin_family = SenderPort.sin_family = AF_INET;
@@ -38,8 +37,7 @@ int main() {
 	cin >> ReceiverPort.sin_port >> SenderPort.sin_port >> RetransmissionTimer >> NoOfPacketsToBeSent;
 
 	// Bind the socket with the sender address
-	if ( bind(sockfd, (const struct sockaddr *)&SenderPort, sizeof(SenderPort)) < 0 )
-	{
+	if (bind(sockfd, (const struct sockaddr *)&SenderPort, sizeof(SenderPort)) < 0){
 		perror("bind failed");
 		exit(EXIT_FAILURE);
 	}
@@ -50,8 +48,7 @@ int main() {
 
 	ofstream out("sender.txt");
 	
-	while(i <= NoOfPacketsToBeSent)
-	{	
+	while(i <= NoOfPacketsToBeSent){	
 		// Making Packet array by adding sequence number to "Packet:"
 		int j = 7;
 		string num = to_string(i);
@@ -82,8 +79,7 @@ int main() {
 					NumInAck.push_back(buffer[j]);
 				int ReceivedAckNum = stoi(NumInAck);
 
-				if(ReceivedAckNum == i+1)
-				{
+				if(ReceivedAckNum == i+1){
 					AckReceived = true;
 					i++;			// Send packet with next sequence number in the next iteration
 					break;
